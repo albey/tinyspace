@@ -138,6 +138,29 @@ export const BODIES: Body[] = [
     },
   },
   {
+    // The asteroid belt's stop: the camera visits Ceres, the biggest thing in the belt.
+    id: 'belt', texture: T('2k_ceres.jpg'),
+    radius: 0.25, orbit: 32, angle: 87.5, tilt: 4, spin: 0.2,
+    text: {
+      en: {
+        name: 'Asteroid belt', kind: 'Home of Ceres, a dwarf planet',
+        facts: [
+          'Millions of rocks going round the Sun, between Mars and Jupiter.',
+          'The biggest one is Ceres, a dwarf planet.',
+          'Some are as small as pebbles, others as big as mountains.',
+        ],
+      },
+      it: {
+        name: 'Fascia degli asteroidi', kind: 'La casa di Cerere, un pianeta nano',
+        facts: [
+          'Milioni di sassi che girano intorno al Sole, tra Marte e Giove.',
+          'Il più grande è Cerere, un pianeta nano.',
+          'Alcuni sono piccoli come sassolini, altri grandi come montagne.',
+        ],
+      },
+    },
+  },
+  {
     id: 'jupiter', texture: T('2k_jupiter.jpg'),
     radius: 2.8, orbit: 40, angle: 100, tilt: 3.1, spin: 0.5,
     text: {
@@ -250,9 +273,20 @@ export const BODIES: Body[] = [
   },
 ]
 
+// Where the asteroid belt's rocks go round the Sun, between Mars (25) and Jupiter (40).
+export const BELT = { inner: 28.5, outer: 35.5 }
+
 export function positionOf(body: Body): Vector3 {
   const a = (body.angle * Math.PI) / 180
   return new Vector3(body.orbit * Math.cos(a), 0, -body.orbit * Math.sin(a))
+}
+
+// How big a body is drawn in the whole-solar-system view, where at their usual size the small ones
+// would be specks. Planets at least 2.2, dwarf planets (Ceres, Pluto) 1.3, so they still look smaller.
+export function overviewRadius(body: Body): number {
+  if (body.orbit === 0) return body.radius
+  const smallest = body.id === 'belt' || body.id === 'pluto' ? 1.3 : 2.2
+  return Math.max(body.radius * 1.6, smallest)
 }
 
 // The size to frame on screen: Saturn's rings count, but they spread sideways, where the screen is wider.
