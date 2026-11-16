@@ -2,6 +2,8 @@
 
 A simple space game for toddlers. Fly from the Sun out to Pluto, through the asteroid belt, one stop at a time: each planet spins on the screen with its name and a few facts, and the camera flies through the solar system to get from one to the next.
 
+![TinySpace: Saturn and its rings in big letters, "Planet 6", three facts about it with a 🔊 button, Jupiter and Uranus buttons either side, and a dot for each stop along the bottom](docs/screenshot.png)
+
 ## How to play
 
 | Control | What it does |
